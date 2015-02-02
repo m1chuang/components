@@ -1,0 +1,188 @@
+
+.loginPanel{
+
+  position: fixed;
+  z-index: 99999;
+
+top: 50%;
+
+left: 50%;
+transform: translateX(-50%) translateY(-50%);
+}
+.loginPanel span, div{
+  text-shadow:none;
+
+}
+.loginPanel #logo{
+  font-size: 2em;
+  color: white;
+  text-decoration: none;
+}
+.loginPanel form {
+  width: 380px;
+
+  padding: 0em 3em 2em 3em;
+  background: #BED0E0;
+  border-radius: 5px;
+  border: 1px solid #ebebeb;
+  box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+}
+.loginPanel .header{
+text-align: center;
+width: 100%;
+display: inline-block;
+margin: .3em 0 0em 0em;
+color: #fff;
+font-size: 38px;
+font-family: dosis-ebold;
+}
+
+.loginPanel .footer{
+  margin-top: 1em;
+  margin: 0 auto;
+text-align: center;
+}
+.loginPanel .group {
+  position: relative;
+  margin: 1.7em 0em 0em 0px;
+}
+.loginPanel .row.remember-login {
+margin: .3em 0 1em 0;
+}
+.loginPanel input {
+  font-size: 18px;
+  background: #fafafa;
+  color: #636363;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #757575;
+  margin: 0 auto;
+  padding: 10px 10px 10px 5px;
+  width: 100%;
+  display: inline-block;
+}
+
+.loginPanel input:focus {
+  outline: none;
+  border: 1px solid #757575;
+}
+.loginPanel .remember{
+  width:15px;
+  height: 15px;
+  margin-right: 0.5em;
+  display: inline-block;
+  position: relative;
+  bottom: -0.15em;
+
+}
+
+/* Label */
+
+.loginPanel label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  top: 10px;
+  transition: all 0.2s ease;
+}
+
+
+/* active */
+
+.loginPanel input:focus ~ label, input.used ~ label {
+  top: -25px;
+  /* font-size: 14px; */
+  color: #4a89dc;
+  left: -6px;
+  font-size: 1.5em;
+  transform: scale(.75);
+}
+.loginPanel label.lock {
+  top: -25px;
+  transform: scale(.75);
+  color: #4a89dc;
+  font-size: 1.5em;
+  left: -12px;
+}
+
+/* Underline */
+
+.loginPanel .bar {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+.loginPanel .row.remember-login { width:92%; margin-left:0;
+}
+.loginPanel span#remember { box-sizing:border-box;
+}
+.loginPanel .bar:before, .bar:after {
+  content: '';
+  height: 2px;
+
+  bottom: 1px;
+  position: absolute;
+  background: #4a89dc;
+  transition: all 0.2s ease;
+}
+
+.loginPanel .bar:before { left: 50%; }
+
+.loginPanel .bar:after { right: 50%; }
+
+/* active */
+
+.loginPanel input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
+
+
+/* Highlight */
+
+.loginPanel .highlight {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+
+/* Button */
+
+.loginPanel .button {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  font-size: 16px;
+  line-height: 20px;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid #3160B6;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+  padding: 12px 24px;
+  margin: .3em 0 1em 0;
+}
+.loginPanel .button:focus { outline: 0; }
+
+
+/* Button modifiers */
+
+.loginPanel .buttonBlue {
+  background: #4a89dc;
+  text-shadow: 2px 2px 0 rgba(39, 110, 204, .5);
+}
+
+.loginPanel .buttonBlue:hover { background: #357bd8; }
+
+
+
