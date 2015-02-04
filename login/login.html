@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" media="screen" type="text/css" />
         <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
         <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
-        <script src="./backbone.session.js"></script>
+
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 
@@ -13,35 +13,39 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
 
 
+
+
 <script type="text/template" id="loginPanel-template">
 <form id="login" name="user" >
-          <div class="row header">
-            <a id="logo">login</a>
-            <div class="logo-text"></div>
-          </div>
+  <div class="row header">
+    <a id="logo" href="{{=URL('default', 'index')}}">
+      <img src="{{=URL('static', 'images/gildshire.svg')}}">
+      <span class="logo-text">BETA</span>
+    </a>
+  </div>
+  <div class="row group">
+      <input type="email" name="inp-email"><span class="highlight"></span><span class="bar"></span>
+        <label class="placeHold">Email</label>
+  </div>
+  <div class="row group">
+    <input type="password" name="inp-pwd"><span class="highlight"></span><span class="bar"></span>
+    <label class="placeHold">Password</label>
+  </div>
+  <div class="row remember-login">
+    <div class="remember">
+      <input type="checkbox" value="1" id="checkboxFiveInput" name="" />
+    </div>
+    <span id="remember">Remember me(For 30 days)</span>
+  </div>
 
-          <div class="row group">
-              <input type="email" name="inp-email"><span class="highlight"></span><span class="bar"></span>
-              <label class="placeHold">Email</label>
-            </div>
-              <div class="row group">
-            <input type="password" name="inp-pwd"><span class="highlight"></span><span class="bar"></span>
-            <label class="placeHold">Password</label>
-          </div>
-            <div class="row remember-login">
-
-            <div class="remember">
-            <input type="checkbox" value="1" id="checkboxFiveInput" name="" />
-
-            </div>
-
-              <span id="remember">Remember me(For 30 days)</span>
-            </div>
-          </div>
           <button id="login" type="button" class="row button buttonBlue">Login</button>
-          <a class="row forgot" href="#">Forgot password?</a>
-          <a class="row register"href="#">Sign up now!</a>
-          <div class="row footer"><span></span></div>
+  <div class="row group">
+    <a class="row forgot" href="#">Forgot password?</a>
+    <a class="row register"href="#">Sign up now!</a>
+  </div>
+          <div class="row footer"><span>
+<p class="text-center">© Gildshire {{=request.now.year}}</p>
+          </span></div>
 
         </form>
 </script>
@@ -50,8 +54,10 @@
 <script type="text/template" id="register-template">
 <form id="register" name="user" >
   <div class="row header">
-    <a href="#logo"><img src="http://www.gildshire.com/gildshire/static/images/gildshire.svg"></a>
-    <div class="logo-text">Beta</div>
+    <a id="logo" href="{{=URL('default', 'index')}}">
+      <img src="{{=URL('static', 'images/gildshire.svg')}}">
+      <span class="logo-text">BETA</span>
+    </a>
   </div>
 
   <div class="row group fname">
@@ -76,146 +82,19 @@
     <label class="placeHold">password</label>
   </div>
   <button id="register" type="button" class="row button buttonBlue">Register</button>
-  <div class="row footer"><span>© Gildshire 2015</span></div>
+
+
+  <div class="row group">
+  <a class="row login"href="#">Back to login!</a>
+  </div>
+
+   <div class="row footer"><span>
+<p class="text-center">© Gildshire {{=request.now.year}}</p>
+          </span></div>
 </form>
 </script>
-        <script>
-        //var session = new APP.Session();
-        var LoginPanel = Backbone.View.extend({
 
-          events: {
-              "click button#login" : "login",
-              "click a.forgot": "forgot",
-              "click a.register": "register",
-          },
-          initialize: function(){
-            console.log('LoginPanel has been initialized.');
-             _.bindAll(this, 'render', 'login');
-            this.render();
-          },
-          template: _.template( $("#loginPanel-template").html()),
-
-          render: function() {
-            this.$el.html( this.template );
-            return this;
-          },
-          login: function( evt ) {
-              var data = {
-                email:$('form#login').find( "input[name='inp-email']" ).val(),
-                password:$('form#login').find( "input[name='inp-pwd']" ).val()
-              }
-              alert('login attempt..');
-              $.ajax({
-                type: "POST",
-                url: "http://127.0.0.1:4000/api/v01/user/login",
-                data: data,
-                success:function(ret){
-                  window.localStorage.setItem('sessinToken', ret);
-                  alert(window.localStorage.getItem('sessinToken'));
-                  $.ajaxSend(function(event, request) {
-                     var token = window.localStorage.getItem('sessinToken');//App.getAuthToken();
-                     if (token) {
-                        request.setRequestHeader("token", token);
-                     }
-                  });
-                }
-              });
-              evt.preventDefault( );
-          },
-          forgot: function( evt ) {
-              alert('forgot attempt');
-          },
-          register: function(evt){
-              alert('register attempt');
-              $('.registerPanel').css('display','block');
-              $('.loginPanel').css('display','none');
-          }
-      });
-        var RegisterPanel = Backbone.View.extend({
-          events: {
-              "click button#register" : "register",
-          },
-          initialize: function(){
-            console.log('RegisterPanel has been initialized.');
-             _.bindAll(this, 'render', 'register');
-            this.render();
-          },
-          template: _.template( $("#register-template").html()),
-          render: function() {
-            this.$el.html( this.template );
-            return this;
-          },
-          register: function( evt ) {
-              alert('submit registration attempt');
-              var data = {
-                first_name:$('form#register').find( "input[name='inp-fname']" ).val(),
-                last_name:$('form#register').find( "input[name='inp-lname']" ).val(),
-                username:$('form#register').find( "input[name='inp-uname']" ).val(),
-                email:$('form#register').find( "input[name='inp-email']" ).val(),
-                password:$('form#register').find( "input[name='inp-pwd']" ).val()
-              }
-              $.ajax({
-                type: "POST",
-                url: "http://127.0.0.1:4000/api/v01/user",
-                data: data,
-                success:function(ret){
-                  //window.localStorage.setItem('sessinToken', ret);
-                  alert(ret);
-                }
-              });
-              evt.preventDefault( );
-          }
-      });
-
-
-
-
-        function inputDetect () {
-            $("#scrptRunBtn").text ("Script has been run.");
-            var inpsToMonitor = document.querySelectorAll (
-                "form[name='user'] input[name^='inp']"
-            );
-            for (var J = inpsToMonitor.length - 1;  J >= 0;  --J) {
-                inpsToMonitor[J].addEventListener ("change",    adjustStyling, false);
-                inpsToMonitor[J].addEventListener ("keyup",     adjustStyling, false);
-                inpsToMonitor[J].addEventListener ("focus",     adjustStyling, false);
-                inpsToMonitor[J].addEventListener ("blur",      adjustStyling, false);
-                inpsToMonitor[J].addEventListener ("mousedown", adjustStyling, false);
-                //-- Initial update. note that IE support is NOT needed.
-                var evt = document.createEvent ("HTMLEvents");
-                evt.initEvent ("change", false, true);
-                inpsToMonitor[J].dispatchEvent (evt);
-            }
-        };
-
-        function adjustStyling (zEvent) {
-            var inpVal  = zEvent.target.value;
-            var e;
-            if (inpVal  &&  inpVal.replace (/^\s+|\s+$/g, "") ){
-                e = zEvent.target.parentNode.getElementsByClassName('placeHold')[0];
-                e.className = e.className + " lock";
-            }else{
-                e = zEvent.target.parentNode.getElementsByClassName('placeHold')[0];
-                e.className = "placeHold";
-            }
-        };
-
-$(function( ) {
-        //Backbone.Component.initialize( { "namespace" : Example } );
-
-        console.log('app start');
-        var login = new LoginPanel();
-        login.setElement( $( "#view-1" ) );
-        login.render( );
-        $('#view-1').append(login.$el);
-        var register = new RegisterPanel();
-        register.setElement( $( "#view-2" ) );
-        register.render( );
-        $('#view-2').append(register.$el);
-        inputDetect();
-      });
-
-</script>
+<script src="./js/app.js"></script>
 <style>
 .registerPanel{
   display:none;
