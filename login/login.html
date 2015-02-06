@@ -15,14 +15,21 @@
 
 
 
-<script type="text/template" id="loginPanel-template">
-<form id="login" name="user" >
+
+
+
+
+<script type="text/template" id="account-template">
+
+<div class="AccountPanel">
   <div class="row header">
     <a id="logo" href="">
-      <img src="">Brand
-      <span class="logo-text"></span>
+      <img src="<%- logoImg %>">
+      <span class="logo-text"><%- logoText %></span>
     </a>
   </div>
+<!--LOGIN -->
+<form id="login" name="user" >
   <div class="row group">
       <input type="email" name="inp-email"><span class="highlight"></span><span class="bar"></span>
         <label class="placeHold">Email</label>
@@ -38,27 +45,20 @@
     <span id="remember">Remember me(For 30 days)</span>
   </div>
 
-          <button id="login" type="button" class="row button buttonBlue">Login</button>
+  <button id="login" type="button" class="row button buttonBlue">Login</button>
   <div class="row group">
     <a class="row forgot" href="#">Forgot password?</a>
     <a class="row register"href="#">Sign up now!</a>
   </div>
-          <div class="row footer"><span>
-<p class="text-center">© Gildshire</p>
-          </span></div>
-
-        </form>
-</script>
 
 
-<script type="text/template" id="register-template">
+
+
+</form>
+<!--EOF LOGIN -->
+<!--REGISTER -->
 <form id="register" name="user" >
-  <div class="row header">
-    <a id="logo" href="">
-      <img src="">Brand
-      <span class="logo-text"></span>
-    </a>
-  </div>
+
 
   <div class="row group fname">
     <input type="text" name="inp-fname"><span class="highlight"></span><span class="bar"></span>
@@ -85,14 +85,60 @@
 
 
   <div class="row group">
-  <a class="row login"href="#">Back to login!</a>
+  <a class="row showLogin"href="#">Back to login!</a>
   </div>
 
-   <div class="row footer"><span>
-<p class="text-center">© footer</p>
-          </span></div>
 </form>
+<!--EOF REGISTER -->
+
+<form id="reset" name="user" >
+
+  <div class="reset-step-1">
+    <div class="row group">
+      <input type="email" name="inp-email"><span class="highlight"></span><span class="bar"></span>
+      <label class="placeHold">Email</label>
+    </div>
+
+    <button id="sendEmail" type="button" class="row button buttonBlue">Send Password Reset</button>
+
+  </div>
+  <div class="reset-step-2">
+  <div class="row group">
+    <input type="text" name="inp-fname"><span class="highlight"></span><span class="bar"></span>
+      <label class="placeHold">Enter token</label>
+      </div>
+    <button id="checkToken" type="button" class="row button buttonBlue">Veryfy token!</button>
+  </div>
+  <div class="reset-step-3">
+    <div class="row group">
+      <input type="password" name="inp-npwd"><span class="highlight"></span><span class="bar"></span>
+      <label class="placeHold">New password</label>
+    </div>
+
+    <div class="row group">
+      <input type="password" name="inp-vnpwd"><span class="highlight"></span><span class="bar"></span>
+      <label class="placeHold">Veryfy new password</label>
+    </div>
+    <button id="resetPwd" type="button" class="row button buttonBlue">Reset password</button>
+  </div>
+  <div class="reset-success">
+    <img src="{{=URL('static', 'css/green_check.svg')}}">
+    <span>You have reset password successfully!</span>
+  </div>
+  <div class="row group">
+  <a class="row showLogin"href="#">Back to login!</a>
+  </div>
+
+</form>
+<!--EOF RESET-->
+  <div class="row footer"><span>
+    <p class="text-center"><%- footer %></p>
+  </span></div>
+</div>
+
+
 </script>
+
 
 <script src="./js/app.js"></script>
 <style>
@@ -109,8 +155,7 @@
     </head>
 
     <body>
-      <div class="user loginPanel" id="view-1"></div>
-      <div class="user registerPanel" id="view-2"></div>
+      <div class="user accountPanel" id="view-1"></div>
 
     </body>
 </html>

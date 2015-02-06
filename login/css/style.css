@@ -3,24 +3,11 @@
 
   position: fixed;
   z-index: 99999;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 
-top: 50%;
-
-left: 50%;
-transform: translateX(-50%) translateY(-50%);
-}
-.user span, div{
-  text-shadow:none;
-
-}
-.user #logo{
-  font-size: 2em;
-  color: white;
-  text-decoration: none;
-}
-.user form {
-  width: 368px;
-
+   width: 368px;
   padding: 0em 2em 1em 2em;
   background: rgba(190, 208, 224, 0.71);
   border-radius: 18px;
@@ -28,31 +15,39 @@ transform: translateX(-50%) translateY(-50%);
   box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
   font-size: 1.2em;
 }
+.user span, div{
+  text-shadow:none;
+}
+.user #logo{
+  font-size: 2em;
+  color: white;
+  text-decoration: none;
+}
+
 a.row {
-padding: 0;
-margin: 0;
+  padding: 0;
+  margin: 0;
 }
 .user .header{
-text-align: center;
-width: 100%;
-display: inline-block;
-margin: .3em 0 0em 0em;
-color: #fff;
-font-size: 38px;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  margin: .3em 0 0em 0em;
+  color: #fff;
+  font-size: 38px;
 
 }
-
 .user .footer{
   margin-top: 1em;
   margin: 0 auto;
-text-align: center;
+  text-align: center;
 }
 .user .group {
   position: relative;
   margin: 1.7em 0em 0em 0px;
 }
 .user .row.remember-login {
-margin: .3em 0 1em 0;
+  margin: .3em 0 1em 0;
 }
 .user input {
   font-size: 18px;
@@ -85,7 +80,7 @@ margin: .3em 0 1em 0;
 
 .user label {
   color: #999;
-  font-size: 18px;
+  font-size: 1em;
   font-weight: normal;
   position: absolute;
   pointer-events: none;
@@ -95,21 +90,14 @@ margin: .3em 0 1em 0;
 }
 
 
-/* active */
-
-.user input:focus ~ label, input.used ~ label {
+  /* active */
+.user label.lock, .user input:focus ~ label, input.used ~ label {
   top: -25px;
   /* font-size: 14px; */
   color: #4a89dc;
+  font-size: 1.5em;
   left: 1px;
   /*transform: scale(.75);*/
-}
-.user label.lock {
-  top: -25px;
-  /*transform: scale(.75);*/
-  color: #4a89dc;
-  font-size: 1.5em;
-  left: -12px;
 }
 
 /* Underline */
@@ -200,8 +188,29 @@ top: 7em;
 font-size: 14px;
 }
 
-
-
-.user.registerPanel{
+.user form#register{
   display: none;
+}
+.user form#reset{
+  display: none;
+}
+.user form#reset .reset-step-2 {
+  display: none;
+}
+.user form#reset .reset-step-3{
+  display: none;
+}
+.user form#reset .reset-success{
+  display: none;
+}
+
+.user form#reset .reset-success{
+  display: none;
+  text-align: center;
+  font-size: 1.5em;
+}
+.user form#reset .reset-success img{
+  height: 11em;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
